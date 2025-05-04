@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('{{ asset('/theme/assets/img/about-bg.jpg') }}')">
+        <header class="masthead" style="background-image: url('{{ asset('theme/assets/img/about-bg.jpg') }}')">
           <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -34,5 +34,21 @@
                   </div>
               </div>
           </div>
+          <div class="text-center my-4">
+            <h1>Features</h1>
+          </div>
+          
+          <div class="container">
+            <div class="row row-cols-4 gx-4">
+                @foreach ($features as $feature )
+                    <div class="col border rounded p-3">
+                        <img src="{{ asset( $feature->image_path ) }}" alt="">
+                        <span>{{$feature->title}}</span>
+                    </div>
+                @endforeach
+            </div>
+          </div>
+          
+          
       </main>
 @endsection

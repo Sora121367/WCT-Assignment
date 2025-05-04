@@ -7256,6 +7256,9 @@ textarea.form-control-lg {
   margin-right: 0.5rem !important;
   margin-left: 0.5rem !important;
 }
+.mx-6px {
+  margin-right: 6px;
+}
 
 .mx-3 {
   margin-right: 1rem !important;

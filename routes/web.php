@@ -1,20 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\FeaturesController;
+use App\Models\Features;
+use App\Http\Controllers\Backends\BackendFeaturesController;
 
 // Route of Integrate theme
-Route::get('/', function () {
-    return view('pages.home');
+Route::get('/', [PagesController::class,'getHome'])->name("pages.home");
+Route::get('/contact', [PagesController::class,'getContact'])->name("pages.contact");
+Route::get('/about', [FeaturesController::class,'index'])->name("pages.about");
+Route::get('/post', [PagesController::class,'getPost'])->name("pages.post");
+
+Route::group([
+    'prefix' => 'backends',
+], function () {
+    Route::get('/admin', [BackendFeaturesController::class, 'index'])->name('backends.admin');
+    Route::get('/create', [BackendFeaturesController::class, 'create'])->name('backends.create');
+    Route::get('/edit/{id}', [BackendFeaturesController::class, 'edit'])->name('backends.edit');
+    Route::put('/update/{id}', [BackendFeaturesController::class, 'update'])->name('backends.update');
+    Route::delete('/delete/{id}', [BackendFeaturesController::class, 'delete'])->name('backends.delete');
+    Route::post('/store', [BackendFeaturesController::class, 'store'])->name('backends.store');
+
 });
-Route::get('/about', function () {
-    return view('pages.about');
-});
-Route::get('/contact', function () {
-    return view('pages.contact');
-});
-Route::get('/post', function () {
-    return view('pages.post');
-});
+
 
 Auth::routes();
 
